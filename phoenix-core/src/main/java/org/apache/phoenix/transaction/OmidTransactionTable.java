@@ -336,4 +336,24 @@ public class OmidTransactionTable implements PhoenixTransactionalTable {
         // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    public void setOperationTimeout(int operationTimeout) {
+
+    }
+
+    @Override
+    public int getOperationTimeout() {
+        return 0;
+    }
+
+    @Override
+    public void setRpcTimeout(int rpcTimeout) {
+
+    }
+
+    @Override
+    public int getRpcTimeout() {
+        return 0;
+    }
 }

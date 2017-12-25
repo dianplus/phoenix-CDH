@@ -50,6 +50,7 @@ import org.apache.phoenix.trace.TraceWriter;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.sun.istack.NotNull;
+import org.apache.phoenix.trace.TracingUtils;
 
 /**
  * Helper class to manage using the {@link Tracer} within Phoenix
@@ -174,8 +175,12 @@ public class Tracing {
     }
 
     public static String getSpanName(Span span) {
-        return Tracing.TRACE_METRIC_PREFIX + span.getTraceId() + SEPARATOR + span.getParentId()
-                + SEPARATOR + span.getSpanId();
+//        return Tracing.TRACE_METRIC_PREFIX + span.getTraceId() + SEPARATOR + span.getParentId()
+//                + SEPARATOR + span.getSpanId();
+      long[] parents = span.getParents();
+      return Tracing.TRACE_METRIC_PREFIX + span.getTraceId() + SEPARATOR +
+          (parents.length > 0 ? parents[0] : TracingUtils.ROOT_SPAN_ID ) + SEPARATOR +
+          span.getSpanId();
     }
 
     public static Span child(Span s, String d) {
